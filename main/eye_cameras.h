@@ -5,6 +5,7 @@
 
 #include <string>
 #include <iomanip>
+#include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
 #ifdef DIRECT_SHOW_AVAILABLE
