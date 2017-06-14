@@ -2,7 +2,7 @@
 
 include_directories (
 #  "${PROJECT_SOURCE_DIR}"
-  "../external/DirectShowFrameGrabber"
+#  "../external/DirectShowFrameGrabber"
   ${OpenCV_INCLUDE_DIRS}
   ${Boost_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIR}
@@ -14,14 +14,14 @@ include_directories (
 
 file (GLOB SRCS 
   "*.cpp" 
-  "../external/DirectShowFrameGrabber/*.cpp"
-  "../external/DirectShowFrameGrabber/*.c"
+#  "../external/DirectShowFrameGrabber/*.cpp"
+#  "../external/DirectShowFrameGrabber/*.c"
   # "external/DirectShowFrameGrabber/*.idl"pupillabs
   )
 
 file (GLOB HEADERS 
   *.h *.hpp 
-  "../external/DirectShowFrameGrabber/*.h"
+#  "../external/DirectShowFrameGrabber/*.h"
   )
 
 
