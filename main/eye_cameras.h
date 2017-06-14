@@ -1,7 +1,7 @@
 #ifndef EYE_CAMERAS_H
 #define EYE_CAMERAS_H
 
-#define DIRECT_SHOW_AVAILABLE
+//#define DIRECT_SHOW_AVAILABLE
 
 #include <string>
 #include <opencv2/highgui/highgui.hpp>
