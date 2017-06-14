@@ -161,7 +161,7 @@ public:
 	};
 
 
-	Position3D Pose::operator*(const Position3D& x) const
+	Position3D operator*(const Position3D& x) const
 	{
 		return Position3D((q * x) + pos);
 	}
