@@ -13,6 +13,7 @@
 #include <boost/serialization/string.hpp>
 #include <boost/thread.hpp>
 #include <boost/math/quaternion.hpp>
+#include <boost/array.hpp>
 
 #include <opencv2/core.hpp>
 
