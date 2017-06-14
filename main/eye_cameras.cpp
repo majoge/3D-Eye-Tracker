@@ -271,11 +271,13 @@ void record_eyecams(){
 void test_eyecam(){
 
 #if 0
+#ifdef DIRECT_SHOW_AVAILABLE
 	Ubitrack::Drivers::DirectShowFrameGrabber DSfg0("Pupil Cam1 ID0");
 	DSfg0.start();
+#endif // DIRECT_SHOW_AVAILABLE
 	while (cv::waitKey(5) != 'q');
 	return;
-#endif
+#endif // 0
 	EyeCamera eyecamL(0);
 	EyeCamera eyecamR(2);
 	EyeCamera eyecamW(1);
@@ -388,18 +390,28 @@ void EyeCamera::fetchFrame(cv::Mat &frame){
 
 
 EyeCameraDS::EyeCameraDS(std::string cam_name)
+#ifdef DIRECT_SHOW_AVAILABLE
 	: DSfg(cam_name)
+#endif
 {
+#ifdef DIRECT_SHOW_AVAILABLE
 	DSfg.start();
+#endif
 }
 EyeCameraDS::~EyeCameraDS(){
+#ifdef DIRECT_SHOW_AVAILABLE
 	DSfg.stop();
+#endif
 }
 bool EyeCameraDS::isOpened(){
 	return true;
 }
 void EyeCameraDS::fetchFrame(cv::Mat &frame){
+#ifdef DIRECT_SHOW_AVAILABLE
 	DSfg.getFrame(frame);
+#else
+	// TODO: Check if OpenCV API call is needed here
+#endif
 }
 
 

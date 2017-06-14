@@ -1,9 +1,14 @@
 #ifndef EYE_CAMERAS_H
 #define EYE_CAMERAS_H
 
+#define DIRECT_SHOW_AVAILABLE
+
 #include <string>
 #include <opencv2/highgui/highgui.hpp>
+
+#ifdef DIRECT_SHOW_AVAILABLE
 #include "DirectShowFrameGrabber.h"
+#endif
 
 namespace eye_tracker
 {
@@ -28,7 +33,9 @@ public:
 	void fetchFrame(cv::Mat &frame);
 protected:
 private:
+#ifdef DIRECT_SHOW_AVAILABLE
 	Ubitrack::Drivers::DirectShowFrameGrabber DSfg;
+#endif
 };
 
 /**
