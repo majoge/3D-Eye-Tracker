@@ -163,7 +163,7 @@ int main(int argc, char *argv[]){
 		case InputMode::CAMERA:
 			camera_indices[0] = 0;
 			camera_indices[1] = 2;
-#if 1
+#ifndef DIRECT_SHOW_AVAILABLE
 			// OpenCV HighGUI frame grabber
 			eyecams[0] = std::make_unique<eye_tracker::EyeCamera>(camera_indices[0], false);
 			eyecams[1] = std::make_unique<eye_tracker::EyeCamera>(camera_indices[1], false);
