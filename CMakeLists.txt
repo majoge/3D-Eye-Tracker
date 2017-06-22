@@ -12,11 +12,16 @@ set(CMAKE_INSTALL_PREFIX "./install")
 set(BOOST_ROOT "/usr/local/Cellar/boost/1.64.0_1")
 set(OpenCV_DIR "/usr/local/Cellar/opencv3/3.2.0/share/OpenCV")
 
-# Bundled external libraries
-set(CMAKE_PREFIX_PATH  "${PROJECT_SOURCE_DIR}/external/Ceres-1.11/CMake")
+
+# [Ceres] Find Ceres modules
+include_directories("/usr/local/Cellar/ceres-solver/1.12.0_4/lib/cmake/Ceres")
+
+# [SPII] Find SPII modules
 set(SPII_INSTALL_DIR   "${PROJECT_SOURCE_DIR}/external/spii-3.0.0")
-set(EIGEN_INCLUDE_DIR  "${PROJECT_SOURCE_DIR}/external/Eigen-3.2.7")
-set(EIGEN3_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/external/Eigen-3.2.7")
+
+# [Eigen] Find Eigen modules
+find_package(Eigen3 REQUIRED)
+include_directories(${EIGEN3_INCLUDE_DIR})
 
 
 
@@ -57,7 +62,6 @@ ENDIF (CMAKE_SIZEOF_VOID_P EQUAL 8)
 find_package ( Boost 1.62 COMPONENTS filesystem system timer thread date_time chrono regex serialization REQUIRED )
 find_package ( OpenCV REQUIRED )
 #find_package ( TBB REQUIRED )
-find_package ( Eigen3 REQUIRED )
 find_package (Ceres REQUIRED)
 
 
