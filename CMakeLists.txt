@@ -16,9 +16,6 @@ set(OpenCV_DIR "/usr/local/Cellar/opencv3/3.2.0/share/OpenCV")
 # [Ceres] Find Ceres modules
 include_directories("/usr/local/Cellar/ceres-solver/1.12.0_4/lib/cmake/Ceres")
 
-# [SPII] Find SPII modules
-set(SPII_INSTALL_DIR   "${PROJECT_SOURCE_DIR}/external/spii-3.0.0")
-
 # [Eigen] Find Eigen modules
 find_package(Eigen3 REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
@@ -66,16 +63,17 @@ find_package (Ceres REQUIRED)
 
 
 ### Find spii
+set(SPII_INSTALL_DIR   "${PROJECT_SOURCE_DIR}/external/spii")
 #ExternalProject_Get_Property(spii SPII_INSTALL_DIR)
 #set(SPII_INSTALL_DIR "C:/SDK/Spii")
 #set(SPII_INSTALL_DIR "C:/SDK/spii-3.0.0/vc14_x64")
 set(spii_INCLUDE_DIRS ${SPII_INSTALL_DIR}/include)
 find_library (spii_LIBRARY_RELEASE
               spii
-              PATHS ${SPII_INSTALL_DIR}/lib/ ${SPII_INSTALL_DIR}/lib/Release)
+              PATHS ${SPII_INSTALL_DIR}/lib/ ${SPII_INSTALL_DIR}/lib/Release PATHS ${SPII_INSTALL_DIR}/build_make/lib/)
 find_library (meschach_LIBRARY_RELEASE
               meschach
-              PATHS ${SPII_INSTALL_DIR}/lib/ ${SPII_INSTALL_DIR}/lib/Release)
+              PATHS ${SPII_INSTALL_DIR}/lib/ ${SPII_INSTALL_DIR}/lib/Release ${SPII_INSTALL_DIR}/build_make/lib/)
 if (spii_LIBRARY_RELEASE AND meschach_LIBRARY_RELEASE)
     set(spii_LIBRARIES ${spii_LIBRARY_RELEASE} ${meschach_LIBRARY_RELEASE})
 else()
@@ -83,7 +81,8 @@ else()
 endif()
 message(STATUS "spii_LIBRARIES:\"${spii_LIBRARIES}\"")
 # copy dll
-file(COPY ${SPII_INSTALL_DIR}/bin/spii.dll DESTINATION ${PROJECT_BINARY_DIR}/main)
+#file(COPY ${SPII_INSTALL_DIR}/bin/spii.dll DESTINATION ${PROJECT_BINARY_DIR}/main)
+file(COPY ${SPII_INSTALL_DIR}/build_make/lib/libspii.dylib DESTINATION ${PROJECT_BINARY_DIR}/main)
 
 # copy OpenCV dlls
 file(GLOB OPENCV_DLLS
