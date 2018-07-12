@@ -375,15 +375,18 @@ void EyeCamera::init(const std::string file_name, bool is_flipped)
 	}
 }
 
-void EyeCamera::fetchFrame(cv::Mat &frame){
+bool EyeCamera::fetchFrame(cv::Mat &frame){
 	if (is_image_==false){
-		cap_ >> frame;
+		if (!cap_.read(frame)) {
+			return false;
+		}
 	}
 	else
 	{
 		frame = mono_img_.clone();
 	}
 	if (is_flipped_) cv::flip(frame, frame, -1);//flip both
+	return true;
 }
 
 
@@ -406,11 +409,12 @@ EyeCameraDS::~EyeCameraDS(){
 bool EyeCameraDS::isOpened(){
 	return true;
 }
-void EyeCameraDS::fetchFrame(cv::Mat &frame){
+bool EyeCameraDS::fetchFrame(cv::Mat &frame){
 #ifdef DIRECT_SHOW_AVAILABLE
 	DSfg.getFrame(frame);
+	return true;
 #else
-	// TODO: Check if OpenCV API call is needed here
+	return false;
 #endif
 }
 

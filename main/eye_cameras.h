@@ -24,7 +24,7 @@ class EyeCameraParent{
 public:
 	virtual ~EyeCameraParent() {};
 	virtual bool isOpened() = 0;
-	virtual void fetchFrame(cv::Mat &frame)=0;
+	virtual bool fetchFrame(cv::Mat &frame)=0;
 };
 
 class EyeCameraDS :public EyeCameraParent{
@@ -32,7 +32,7 @@ public:
 	EyeCameraDS(std::string cam_name);
 	~EyeCameraDS();
 	bool isOpened();
-	void fetchFrame(cv::Mat &frame);
+	bool fetchFrame(cv::Mat &frame);
 protected:
 private:
 #ifdef DIRECT_SHOW_AVAILABLE
@@ -55,7 +55,7 @@ public:
 	~EyeCamera(){
 	}
 	bool isOpened(){ return cap_.isOpened(); }
-	void fetchFrame(cv::Mat &frame);
+	bool fetchFrame(cv::Mat &frame);
 protected:
 	cv::VideoCapture cap_;
 	bool is_flipped_ = false;

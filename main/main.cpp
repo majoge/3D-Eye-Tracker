@@ -221,7 +221,10 @@ int main(int argc, char *argv[]){
 
 		// Fetch images
 		for (size_t cam = 0; cam < kCameraNums; cam++) {
-			eyecams[cam]->fetchFrame(images[cam]);
+			if (!eyecams[cam]->fetchFrame(images[cam])) {
+				is_run = false;
+				break;
+			}
 		}
 		// Process each camera images
 		for (size_t cam = 0; cam < kCameraNums; cam++) {
